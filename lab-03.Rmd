@@ -39,13 +39,19 @@ Are there missing values?
 
 ```{r}
 # which columns are integer
-
+jan_feb_flights %>% 
+  select(where(is.integer)) %>% 
+  glimpse()
 
 # which columns are double
-
+jan_feb_flights %>% 
+  select(where(is.double)) %>% 
+  glimpse()
 
 # which columns are character
-
+jan_feb_flights %>% 
+  select(where(is.character)) %>% 
+  glimpse()
 
 ```
 
