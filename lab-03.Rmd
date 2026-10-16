@@ -87,7 +87,7 @@ _Your answer here_
 
 # join the datasets
 jan_feb_flights <- jan_feb_flights %>%
-  ____________(weather, by = c(______________________)) 
+  left_join(weather, by = c("origin", "year", "month", "day", "hour"))
 ```
 
 ```{r}
