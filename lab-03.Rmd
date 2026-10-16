@@ -82,7 +82,7 @@ _Your answer here_
 
 ## 2.1 Code
 
-```{r eval=FALSE} 
+```{r eval=TRUE} 
 ## REMEMBER TO SET eval=TRUE
 
 # join the datasets
@@ -106,7 +106,7 @@ Describe the difference in wind speed when wind_gust is missing vs not missing:
 
 _Your answer here_
 
-```{r eval=FALSE} 
+```{r eval=TRUE} 
 ## REMEMBER TO SET eval=TRUE
 
 # create a new variable, gust_present
