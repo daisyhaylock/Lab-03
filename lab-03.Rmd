@@ -51,6 +51,9 @@ Are there missing values?
 
 ```{r}
 # which columns contain NA's
+jan_feb_flights %>% 
+  summarise_all(~ sum(is.na(.))) %>% 
+  glimpse()
 
 ```
 
