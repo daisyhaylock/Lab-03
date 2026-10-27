@@ -34,24 +34,30 @@ Are there missing values?
 
 ```{r}
 # explore the types of the columns in jan_feb_flights
+jan_feb_flights %>%
+  summarise_all(typeof) %>%
+    pivot_longer(everything(), names_to = "column", values_to = "type")
 
 ```
 
 ```{r}
 # which columns are integer
-jan_feb_flights %>% 
-  select(where(is.integer)) %>% 
-  glimpse()
+jan_feb_flights %>%
+  summarise_all(typeof) %>%
+    pivot_longer(everything(), names_to = "column", values_to = "type") %>% 
+      filter(type == "integer")
 
 # which columns are double
-jan_feb_flights %>% 
-  select(where(is.double)) %>% 
-  glimpse()
+jan_feb_flights %>%
+  summarise_all(typeof) %>%
+    pivot_longer(everything(), names_to = "column", values_to = "type") %>% 
+      filter(type == "double")
 
 # which columns are character
-jan_feb_flights %>% 
-  select(where(is.character)) %>% 
-  glimpse()
+jan_feb_flights %>%
+  summarise_all(typeof) %>%
+    pivot_longer(everything(), names_to = "column", values_to = "type") %>% 
+      filter(type == "character")
 
 ```
 
@@ -59,20 +65,25 @@ jan_feb_flights %>%
 # which columns contain NA's
 jan_feb_flights %>% 
   summarise_all(~ sum(is.na(.))) %>% 
-  glimpse()
+    pivot_longer(everything(), names_to = "column", values_to = "no") %>% 
+      filter(no > 0)
 
 ```
 
 **Summary:**  
+Used select(where(is.TYPE)) to sort for column types and glimpse to show all selected columns in a list, this was less tidy as it was showing the columns as part of the entire dataset and the values remained.
 
-_Use this space to summarize what you attempted, either from your own exploration or an AI explanation._
+Example;
+jan_feb_flights %>% 
+  select(where(is.integer)) %>% 
+    glimpse()
 
 ## 1.3 Reflection
 
 Did the GenAI explanation (if used) help you? Which language model you explored? 
 What was clear or unclear? Did it make any errors or skip anything important? Did you fact-check? Did you need to provide follow-up prompts or clarifications, or was the first response sufficient?
 
-_Your answer here_
+I did not use GenAI.
 
 ---
 
