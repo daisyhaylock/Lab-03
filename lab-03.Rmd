@@ -104,38 +104,41 @@ jan_feb_flights <- jan_feb_flights %>%
 ```{r}
 # is there a difference in wind speed when wind_gust is missing vs not missing?
 jan_feb_flights %>% 
-    mutate(gust_measured = case_when(wind_gust >= 0 ~ "present",
-                     TRUE ~ "missing")) %>% 
-    select(gust_measured, wind_speed) %>% 
-    group_by(gust_measured) %>% 
-    summarise(mean_wind_speed = mean(wind_speed, na.rm = TRUE))
-
+  mutate(gust_recorded = case_when(wind_gust >=  0 ~ "present",
+                                              TRUE ~ "missing")) %>% 
+    group_by(gust_recorded) %>%  
+    summarise(mean_wind_speed = mean(wind_speed, na.rm = TRUE),
+              sd_wind_speed   = sd(wind_speed, na.rm = TRUE))
 
 ```
 
 Describe the difference in wind speed when wind_gust is missing vs not missing:
 
-_Your answer here_
+Wind speed is increased from 9.2 to 19.2 when wind_gust was recorded, more than the standard deviation.
 
 ```{r eval=TRUE} 
 ## REMEMBER TO SET eval=TRUE
 
 # create a new variable, gust_present
 jan_feb_flights <- jan_feb_flights %>%
-  mutate(gust_present = case_when(wind_gust >= 0 ~ "TRUE", TRUE ~ "missing"))
+  mutate(gust_present = case_when(wind_gust >= 0 ~ TRUE,
+                                            TRUE ~ FALSE))
 
 ```
 
 
 ```{r}
 # is there a relationship between gust_present and dep_delay?
-
+jan_feb_flights %>% 
+  group_by(gust_present) %>% 
+    summarise(mean_dep_delay = mean(dep_delay, na.rm = TRUE),
+              sd_dep_delay   = sd(dep_delay, na.rm = TRUE))
 
 ```
 
 Describe the relationship between gust_present and dep_delay you see (if any).
 
-_Your answer here_
+No meaningful relationship.
 
 ## 2.1 Reflection
 
