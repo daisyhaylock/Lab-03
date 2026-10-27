@@ -160,27 +160,29 @@ jfk_flights <- jan_feb_flights %>%
 ```
 
 
-```{r eval=FALSE} 
+```{r eval=TRUE} 
 ## REMEMBER TO SET eval=TRUE
 
 # Compute the sample mean
-mean_dep_delay <- jfk_flights %>% ________(mean_jfk = mean(dep_delay)) %>% pull(mean_jfk)
+mean_dep_delay <- jfk_flights %>% summarise(mean_jfk = mean(dep_delay)) %>% pull(mean_jfk)
 
 # Construct bootstrap distribution
 set.seed(99)  # for reproducibility
 boot_dist <- jfk_flights %>%
-  ________(response = _________) %>%
-  ________(reps = 1500, type = "bootstrap") %>%
-  ________(stat = _______)                 
+  specify(response = dep_delay) %>%
+  generate(reps = 1500, type = "bootstrap") %>%
+  calculate(stat = "mean")                 
 
 # Compute 95% confidence interval (percentile method)
-boot_dist %>% ...
+boot_dist %>% 
+  summarise(lower = quantile(stat, 0.025),
+            higher = quantile(stat, 0.975))
 
 ```
 
 **Interpretation for the confidence interval**:
 
-_Your answer here_
+The 95% confidence interval is [9.6, 10.6] minutes.
 
 ## 3.2 Using base R
 
@@ -259,8 +261,7 @@ _Your answer here_
 - What are your thoughts on using GenAI as a *thinking partner* or *pair-programming navigator*, rather than a code-generator? Do you think IDS-sidekick is a good design based on your exploration so far? 
 - What is one insight or tip each of you learned today about using GenAI productively or spotting misleading AI-generated code?
 
-_Your answer here_
-
+I did not use AI
 ---
 
 Go to Learn and share your experience with us from that workshop, this information will be very useful for further iteration of IDS and use of GenAI within that module. 
@@ -270,9 +271,7 @@ Under Course information -> [Week4 WS GenAI Reflections](https://www.learn.ed.ac
 
 _If you used AI for this lab, provide a statement like (make sure to specify which GenAI tool you used):_
 
-> I used ELM with IDS-sidekick ....
-or
-> I used ChatGPT/Copilot/Claude to ....
+> I did not use AI
 
 ---
 
